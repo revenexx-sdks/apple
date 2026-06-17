@@ -1,0 +1,241 @@
+import AsyncHTTPClient
+import Foundation
+import NIO
+import JSONCodable
+import RevenexxAPIRevenexxEnums
+import RevenexxAPIRevenexxModels
+
+/// Localisation reference data: countries, currencies, languages.
+open class Locale: Service {
+
+    ///
+    /// Get the current user location based on IP. Returns an object with user
+    /// country code, country name, continent name, continent code, ip address and
+    /// suggested currency. You can use the locale header to get the data in a
+    /// supported language.
+    /// 
+    /// ([IP Geolocation by DB-IP](https://db-ip.com))
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.Locale
+    ///
+    open func localeGet(
+    ) async throws -> Revenexx API — revenexxModels.Locale {
+        let apiPath: String = "/v1/locale"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.Locale = { response in
+            return RevenexxAPIRevenexxModels.Locale.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List of all locale codes in [ISO
+    /// 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.LocaleCodeList
+    ///
+    open func localeListCodes(
+    ) async throws -> Revenexx API — revenexxModels.LocaleCodeList {
+        let apiPath: String = "/v1/locale/codes"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.LocaleCodeList = { response in
+            return RevenexxAPIRevenexxModels.LocaleCodeList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List of all continents. You can use the locale header to get the data in a
+    /// supported language.
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.ContinentList
+    ///
+    open func localeListContinents(
+    ) async throws -> Revenexx API — revenexxModels.ContinentList {
+        let apiPath: String = "/v1/locale/continents"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.ContinentList = { response in
+            return RevenexxAPIRevenexxModels.ContinentList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List of all countries. You can use the locale header to get the data in a
+    /// supported language.
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.CountryList
+    ///
+    open func localeListCountries(
+    ) async throws -> Revenexx API — revenexxModels.CountryList {
+        let apiPath: String = "/v1/locale/countries"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.CountryList = { response in
+            return RevenexxAPIRevenexxModels.CountryList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List of all countries that are currently members of the EU. You can use the
+    /// locale header to get the data in a supported language.
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.CountryList
+    ///
+    open func localeListCountriesEU(
+    ) async throws -> Revenexx API — revenexxModels.CountryList {
+        let apiPath: String = "/v1/locale/countries/eu"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.CountryList = { response in
+            return RevenexxAPIRevenexxModels.CountryList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List of all countries phone codes. You can use the locale header to get the
+    /// data in a supported language.
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.PhoneList
+    ///
+    open func localeListCountriesPhones(
+    ) async throws -> Revenexx API — revenexxModels.PhoneList {
+        let apiPath: String = "/v1/locale/countries/phones"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.PhoneList = { response in
+            return RevenexxAPIRevenexxModels.PhoneList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List of all currencies, including currency symbol, name, plural, and
+    /// decimal digits for all major and minor currencies. You can use the locale
+    /// header to get the data in a supported language.
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.CurrencyList
+    ///
+    open func localeListCurrencies(
+    ) async throws -> Revenexx API — revenexxModels.CurrencyList {
+        let apiPath: String = "/v1/locale/currencies"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.CurrencyList = { response in
+            return RevenexxAPIRevenexxModels.CurrencyList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+    ///
+    /// List of all languages classified by ISO 639-1 including 2-letter code, name
+    /// in English, and name in the respective language.
+    ///
+    /// - Throws: Exception if the request fails
+    /// - Returns: Revenexx API — revenexxModels.LanguageList
+    ///
+    open func localeListLanguages(
+    ) async throws -> Revenexx API — revenexxModels.LanguageList {
+        let apiPath: String = "/v1/locale/languages"
+
+        let apiParams: [String: Any] = [:]
+
+        let apiHeaders: [String: String] = [:]
+
+        let converter: (Any) -> Revenexx API — revenexxModels.LanguageList = { response in
+            return RevenexxAPIRevenexxModels.LanguageList.from(map: response as! [String: Any])
+        }
+
+        return try await client.call(
+            method: "GET",
+            path: apiPath,
+            headers: apiHeaders,
+            params: apiParams,
+            converter: converter
+        )
+    }
+
+
+}

@@ -1,0 +1,52 @@
+import Foundation
+import JSONCodable
+
+/// Attributes List
+open class AttributeList: Codable {
+
+    enum CodingKeys: String, CodingKey {
+        case attributes = "attributes"
+        case total = "total"
+    }
+
+    /// List of attributes.
+    public let attributes: [AnyCodable]
+    /// Total number of attributes in the given collection.
+    public let total: Int
+
+    init(
+        attributes: [AnyCodable],
+        total: Int
+    ) {
+        self.attributes = attributes
+        self.total = total
+    }
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        self.attributes = try container.decode([AnyCodable].self, forKey: .attributes)
+        self.total = try container.decode(Int.self, forKey: .total)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encode(attributes, forKey: .attributes)
+        try container.encode(total, forKey: .total)
+    }
+
+    public func toMap() -> [String: Any] {
+        return [
+            "attributes": attributes as Any,
+            "total": total as Any
+        ]
+    }
+
+    public static func from(map: [String: Any] ) -> AttributeList {
+        return AttributeList(
+            attributes: (map["attributes"] as! [Any]).map { AnyCodable($0) },
+            total: map["total"] as! Int
+        )
+    }
+}

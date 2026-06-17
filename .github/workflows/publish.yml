@@ -1,0 +1,32 @@
+name: Publish
+
+# This SDK is distributed through Swift Package Manager, which resolves
+# packages directly from this repository's git tags. There is no package
+# registry to push to: cutting a GitHub release (which creates the tag) is
+# the publish step. This workflow validates that the tagged commit builds
+# cleanly so consumers can depend on the release with confidence.
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Swift package builds
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: swift build
+
+      - name: Confirm release
+        run: |
+          echo "Swift package built successfully for ${{ github.ref_name }}."
+          echo "Swift Package Manager consumers resolve this release directly from the git tag."
