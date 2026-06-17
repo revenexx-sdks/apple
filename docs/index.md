@@ -49,87 +49,47 @@ Then add it to your target:
 
 ## Getting Started
 
-### Add your Apple Platform
-To initialize your SDK and start interacting with Revenexx services, you need to add a new Apple platform to your project. To add a new platform, go to your Revenexx console, select your project (create one if you haven't already), and click the 'Add Platform' button on the project Dashboard.
-
-From the options, choose to add a new **iOS**, **macOS**, **watchOS** or **tvOS** platform and add your app credentials.
-
-Add your app <u>name</u> and <u>bundle identifier</u>. Your bundle identifier can be found in your Xcode project file or your `Info.plist` file. By registering a new platform, you are allowing your app to communicate with the Revenexx API.
-
-### Registering URL schemes
-
-In order to capture the Revenexx OAuth callback url, the following URL scheme needs to be added to project. You can add this from Xcode by selecting your project file, then the target you wish to use OAuth with. From the `Info` tab, expand the `URL types` section and add your Revenexx instance domain for the `Identifier`, and `revenexx-callback-[PROJECT-ID]` for the `URL scheme`. Be sure to replace the **[PROJECT_ID]** string with your actual Revenexx project ID. You can find your Revenexx project ID in your project settings screen in the console. Alternatively, you can add the following block directly to your targets `Info.plist` file:
-
-```xml
-<key>CFBundleURLTypes</key>
-<array>
-<dict>
-    <key>CFBundleTypeRole</key>
-    <string>Editor</string>
-    <key>CFBundleURLName</key>
-    <string>com.revenexx</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-        <string>revenexx-callback-[PROJECT-ID]</string>
-    </array>
-</dict>
-</array>
-```
-
-Next we need to add a hook to save cookies when our app is opened by its callback URL.
-
-### Registering an OAuth handler view
-
-> If you're using UIKit, you can skip this section.
-
-In SwiftUI this is as simple as ensuring `.registerOAuthHandler()` is called on the `View` you want to invoke an OAuth request from.
-
-### Updating the SceneDelegate for UIKit
-
-> If you're using SwiftUI, you can skip this section.
-
-For UIKit, you need to add the following function to your `SceneDelegate.swift`. If you have already defined this function, you can just add the contents from below.
-
-```swift
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let url = URLContexts.first?.url,
-            url.absoluteString.contains("revenexx-callback") else {
-            return
-        }
-        WebAuthComponent.handleIncomingCookie(from: url)
-    }
-```
-
 ### Init your SDK
 
-Initialize your SDK with your Revenexx server API endpoint and project ID which can be found in your project settings page.
+Initialize your SDK with your Revenexx API endpoint and your credentials. The Apple SDK is a client SDK and supports two authentication methods:
+
+- **Bearer token** — a Zitadel-issued JWT for interactive callers, set via `setBearerAuth()`. This is the recommended method for end-user apps. The value is sent as the `Authorization` header verbatim, so include the `Bearer ` prefix.
+- **API key** — a gateway-managed scoped key (`rvxk_…`), set via `setApiKeyAuth()`. Intended for server-side or trusted environments; never embed an API key in code shipped to end users.
+
+Set your tenant slug with `setTenant()` to scope every request to the correct tenant via the `X-Revenexx-Tenant` header.
 
 ```swift
-import Revenexx
+import RevenexxAPIRevenexx
 
-func main() {
-    let client = Client()
-        .setEndpoint("http://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-        .setProject("5df5acd0d48c2") // Your project ID
-        .setSelfSigned() // Use only on dev mode with a self-signed SSL cert
-}
+let client = Client()
+    .setEndpoint("https://api.revenexx.com") // Your Revenexx API endpoint
+    .setTenant("<TENANT_SLUG>")              // Your Revenexx tenant slug
+    .setBearerAuth("Bearer \(jwt)")          // A Zitadel-issued user JWT
+```
+
+Or, with a scoped API key:
+
+```swift
+import RevenexxAPIRevenexx
+
+let client = Client()
+    .setEndpoint("https://api.revenexx.com") // Your Revenexx API endpoint
+    .setTenant("<TENANT_SLUG>")              // Your Revenexx tenant slug
+    .setApiKeyAuth("rvxk_...")               // Your scoped API key
 ```
 
 ### Make Your First Request
 
-Once your SDK object is initialized, create any of the Revenexx service objects and choose any request to send. Full documentation for any service method you would like to use can be found in your SDK documentation or in the [API References](https://revenexx.com/docs) section.
+Once your client is set up, instantiate any of the Revenexx services with it and send a request. Service methods are `async throws`, so call them with `try await` from an async context. Full documentation for every service method can be found in the [API References](https://revenexx.com/docs).
 
 ```swift
-let account = Account(client)
+import RevenexxAPIRevenexx
+
+let products = Products(client)
 
 do {
-    let user = try await account.create(
-        userId: ID.unique(),
-        email: "email@example.com",
-        password: "password",
-        name: "Max Mustermann"
-    )
-    print(String(describing: user.toMap()))
+    let result = try await products.productsList()
+    print(String(describing: result))
 } catch {
     print(error.localizedDescription)
 }
@@ -138,103 +98,44 @@ do {
 ### Full Example
 
 ```swift
-import Revenexx
+import RevenexxAPIRevenexx
 
-func main() {
+func main() async {
     let client = Client()
-        .setEndpoint("https://[HOSTNAME_OR_IP]/v1") // Your API Endpoint
-        .setProject("5df5acd0d48c2") // Your project ID
-        .setSelfSigned() // Use only on dev mode with a self-signed SSL cert
+        .setEndpoint("https://api.revenexx.com") // Your Revenexx API endpoint
+        .setTenant("<TENANT_SLUG>")              // Your Revenexx tenant slug
+        .setBearerAuth("Bearer \(jwt)")          // A Zitadel-issued user JWT
 
-    let account = Account(client)
-    
+    let products = Products(client)
+
     do {
-        let user = try await account.create(
-            userId: ID.unique(),
-            email: "email@example.com",
-            password: "password",
-            name: "Max Mustermann"
-        )
-        print(String(describing: account.toMap()))
+        let result = try await products.productsList()
+        print(String(describing: result))
+
+        let product = try await products.productsGet(id: "<PRODUCT_ID>")
+        print(String(describing: product.toMap()))
     } catch {
         print(error.localizedDescription)
     }
 }
-```
-
-### Type Safety with Models
-
-The Revenexx Apple SDK provides type safety when working with database documents through generic methods. Methods like `listDocuments`, `getDocument`, and others accept a `nestedType` parameter that allows you to specify your custom model type for full type safety.
-
-```swift
-struct Book: Codable {
-    let name: String
-    let author: String
-    let releaseYear: String?
-    let category: String?
-    let genre: [String]?
-    let isCheckedOut: Bool
-}
-
-let databases = Databases(client)
-
-do {
-    let documents = try await databases.listDocuments(
-        databaseId: "your-database-id",
-        collectionId: "your-collection-id",
-        nestedType: Book.self // Pass in your custom model type
-    )
-    
-    for book in documents.documents {
-        print("Book: \(book.name) by \(book.author)") // Now you have full type safety
-    }
-} catch {
-    print(error.localizedDescription)
-}
-```
-
-**Tip**: You can use the `revenexx types` command to automatically generate model definitions based on your Revenexx database schema. Learn more about [type generation](https://revenexx.com/docs/products/databases/type-generation).
-
-### Working with Model Methods
-
-All Revenexx models come with built-in methods for data conversion and manipulation:
-
-**`toMap()`** - Converts a model instance to a dictionary format, useful for debugging or manual data manipulation:
-```swift
-let user = try await account.get()
-let userMap = user.toMap()
-print(userMap) // Prints all user properties as a dictionary
-```
-
-**`from(map:)`** - Creates a model instance from a dictionary, useful when working with raw data:
-```swift
-let userData: [String: Any] = ["$id": "123", "name": "John", "email": "john@example.com"]
-let user = User.from(map: userData)
-```
-
-**`encode(to:)`** - Encodes the model to JSON format (part of Swift's Codable protocol), useful for serialization:
-```swift
-let user = try await account.get()
-let jsonData = try JSONEncoder().encode(user)
-let jsonString = String(data: jsonData, encoding: .utf8)
 ```
 
 ### Error Handling
 
-When an error occurs, the Revenexx Apple SDK throws a `RevenexxError` object with `message` and `code` properties. You can handle any errors in a catch block and present the `message` or `localizedDescription` to the user or handle it yourself based on the provided error information. Below is an example.
+When a request fails, the Revenexx Apple SDK throws a `RevenexxAPIRevenexxError` with `message`, `code`, `type` and `response` properties. Catch it to inspect the error or present the `message` (or `localizedDescription`) to the user.
 
 ```swift
-import Revenexx
+import RevenexxAPIRevenexx
 
-func main() {
-    let account = Account(client)
-    
-    do {
-        let user = try await account.get()
-        print(String(describing: user.toMap()))
-    } catch {
-        print(error.localizedDescription)
-    }
+let products = Products(client)
+
+do {
+    let product = try await products.productsGet(id: "<PRODUCT_ID>")
+    print(String(describing: product.toMap()))
+} catch let error as RevenexxAPIRevenexxError {
+    print(error.code ?? 0, error.message)
+} catch {
+    print(error.localizedDescription)
 }
 ```
 
@@ -242,10 +143,8 @@ func main() {
 
 You can use the following resources to learn more and get help
 
-- 🚀 [Getting Started Tutorial](https://revenexx.com/docs/getting-started-for-server)
 - 📜 [Revenexx Docs](https://revenexx.com/docs)
 - 💬 [Discord Community](https://revenexx.com/discord)
-- 🚂 [Revenexx Swift Playground](https://github.com/revenexx/playground-for-swift-server)
 
 ## Contribution
 

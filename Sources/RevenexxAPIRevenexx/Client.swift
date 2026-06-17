@@ -172,6 +172,20 @@ open class Client {
     }
 
     ///
+    /// Set tenant
+    ///
+    /// Sets the X-Revenexx-Tenant header sent on every request.
+    ///
+    /// @param String value
+    ///
+    /// @return Client
+    ///
+    open func setTenant(_ value: String) -> Client {
+        _ = addHeader(key: "X-Revenexx-Tenant", value: value)
+        return self
+    }
+
+    ///
     /// Add header
     ///
     /// @param String key
