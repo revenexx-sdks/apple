@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,6 +7,6 @@ let client = Client()
 
 let orders = Orders(client)
 
-let result = try await orders.ordersNumberRangesDefaults()
+let orderNumberRangesSeeded = try await orders.ordersNumberRangesDefaults()
 
 ```

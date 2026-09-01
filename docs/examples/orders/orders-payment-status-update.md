@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,10 +8,10 @@ let client = Client()
 
 let orders = Orders(client)
 
-let order = try await orders.ordersPaymentStatusUpdate(
+let error = try await orders.ordersPaymentStatusUpdate(
     id: "",
     status: .open,
-    payment_id: "" // optional
+    payment_id: "pay_000000000001" // optional
 )
 
 ```

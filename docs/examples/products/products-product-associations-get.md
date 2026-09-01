@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,7 +7,7 @@ let client = Client()
 
 let products = Products(client)
 
-let productAssociations = try await products.productsProductAssociationsGet(
+let error = try await products.productsProductAssociationsGet(
     id: ""
 )
 

@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,6 +7,10 @@ let client = Client()
 
 let pages = Pages(client)
 
-let result = try await pages.pagesMenusList()
+let result = try await pages.pagesMenusList(
+    limit: 1, // optional
+    offset: 1, // optional
+    order: "created_at.desc" // optional
+)
 
 ```

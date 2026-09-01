@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,14 +8,22 @@ let client = Client()
 
 let search = Search(client)
 
-let result = try await search.searchSearchDocumentsGet(
-    collection: .greetings,
+let error = try await search.searchSearchDocumentsGet(
+    collection: .products,
     q: "", // optional
     query_by: "", // optional
     filter_by: "", // optional
     sort_by: "", // optional
-    page: 0, // optional
-    per_page: 0 // optional
+    facet_by: "", // optional
+    max_facet_values: 1, // optional
+    group_by: "", // optional
+    include_fields: "", // optional
+    exclude_fields: "", // optional
+    highlight_full_fields: "", // optional
+    num_typos: 1, // optional
+    prefix: "", // optional
+    page: 1, // optional
+    per_page: 1 // optional
 )
 
 ```

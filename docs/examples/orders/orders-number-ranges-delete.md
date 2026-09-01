@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,7 +7,7 @@ let client = Client()
 
 let orders = Orders(client)
 
-let result = try await orders.ordersNumberRangesDelete(
+let error = try await orders.ordersNumberRangesDelete(
     id: ""
 )
 

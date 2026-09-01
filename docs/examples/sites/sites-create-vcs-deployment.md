@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -10,9 +10,9 @@ let sites = Sites(client)
 
 let deployment = try await sites.sitesCreateVcsDeployment(
     siteId: "",
-    reference: "",
+    reference: "main",
     type: .branch,
-    activate: false // optional
+    activate: true // optional
 )
 
 ```

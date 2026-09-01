@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,6 +7,6 @@ let client = Client()
 
 let channels = Channels(client)
 
-let channelDefaults = try await channels.channelsDefaults()
+let error = try await channels.channelsDefaults()
 
 ```

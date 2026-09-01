@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,13 +8,16 @@ let client = Client()
 
 let markets = Markets(client)
 
-let market = try await markets.marketsUpdate(
+let error = try await markets.marketsUpdate(
     id: "",
-    code: "", // optional
-    currency: "", // optional
+    code: "northwind", // optional
+    currency: "EUR", // optional
     is_default: false, // optional
-    labels: [:], // optional
-    name: "", // optional
+    labels: [
+        "de-DE": "Nordwind",
+        "en-GB": "Northwind"
+    ], // optional
+    name: "Northwind", // optional
     position: 0, // optional
     status: .active // optional
 )

@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -9,9 +9,9 @@ let avatars = Avatars(client)
 
 let result = try await avatars.avatarsGetQR(
     text: "",
-    size: 0, // optional
-    margin: 0, // optional
-    download: false // optional
+    size: 1, // optional
+    margin: 1, // optional
+    download: true // optional
 )
 
 ```

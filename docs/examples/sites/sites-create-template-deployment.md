@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -15,7 +15,7 @@ let deployment = try await sites.sitesCreateTemplateDeployment(
     repository: "",
     rootDirectory: "",
     type: .branch,
-    activate: false // optional
+    activate: true // optional
 )
 
 ```

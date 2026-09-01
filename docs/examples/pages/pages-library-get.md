@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,7 +7,7 @@ let client = Client()
 
 let pages = Pages(client)
 
-let libraryItem = try await pages.pagesLibraryGet(
+let error = try await pages.pagesLibraryGet(
     id: ""
 )
 

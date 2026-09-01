@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,9 +7,9 @@ let client = Client()
 
 let customers = Customers(client)
 
-let result = try await customers.customersAuthRecovery(
-    email: "",
-    url: ""
+let error = try await customers.customersAuthRecovery(
+    email: "einkauf@example.com",
+    url: "https://example.com"
 )
 
 ```

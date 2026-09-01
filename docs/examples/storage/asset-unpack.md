@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -9,7 +9,7 @@ let storage = Storage(client)
 
 let result = try await storage.assetUnpack(
     id: "",
-    keep_archive: false, // optional
+    keep_archive: true, // optional
     target_folder_id: "" // optional
 )
 

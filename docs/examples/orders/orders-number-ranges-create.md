@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,15 +7,17 @@ let client = Client()
 
 let orders = Orders(client)
 
-let numberRange = try await orders.ordersNumberRangesCreate(
-    code: "",
+let error = try await orders.ordersNumberRangesCreate(
+    code: "order",
     channel_id: "", // optional
-    counter: 0, // optional
-    metadata: [:], // optional
-    padding: 0, // optional
-    position_step: 0, // optional
-    prefix: "", // optional
-    step: 0, // optional
+    counter: 123, // optional
+    metadata: [
+        "owner": "erp-sync"
+    ], // optional
+    padding: 6, // optional
+    position_step: 10, // optional
+    prefix: "ORD-", // optional
+    step: 1, // optional
     suffix: "" // optional
 )
 

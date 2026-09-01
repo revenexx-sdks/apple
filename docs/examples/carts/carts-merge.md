@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,7 +7,7 @@ let client = Client()
 
 let carts = Carts(client)
 
-let result = try await carts.cartsMerge(
+let error = try await carts.cartsMerge(
     source_cart_id: "",
     target_cart_id: ""
 )

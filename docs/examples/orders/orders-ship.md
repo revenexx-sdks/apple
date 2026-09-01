@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,15 +7,17 @@ let client = Client()
 
 let orders = Orders(client)
 
-let result = try await orders.ordersShip(
+let error = try await orders.ordersShip(
     id: "",
-    carrier: "", // optional
-    metadata: [:], // optional
-    number: "", // optional
+    carrier: "DHL", // optional
+    metadata: [
+        "warehouse": "HAM-1"
+    ], // optional
+    number: "DEL-000123", // optional
     positions: [], // optional
-    shipped_at: "", // optional
-    tracking_code: "", // optional
-    tracking_url: "" // optional
+    shipped_at: "2026-01-01T12:00:00Z", // optional
+    tracking_code: "00340434161234567890", // optional
+    tracking_url: "https://example.com/track/00340434161234567890" // optional
 )
 
 ```

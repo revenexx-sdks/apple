@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,12 +7,12 @@ let client = Client()
 
 let prices = Prices(client)
 
-let result = try await prices.pricesResolve(
+let error = try await prices.pricesResolve(
     items: [],
-    at: "", // optional
+    at: "2026-03-15T09:00:00Z", // optional
     channel_id: "", // optional
     contact_id: "", // optional
-    currency: "", // optional
+    currency: "EUR", // optional
     market_id: "", // optional
     organization_id: "" // optional
 )

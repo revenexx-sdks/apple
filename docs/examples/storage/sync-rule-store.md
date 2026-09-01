@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,6 +7,13 @@ let client = Client()
 
 let storage = Storage(client)
 
-let result = try await storage.syncRuleStore()
+let result = try await storage.syncRuleStore(
+    sftp_account_id: "",
+    source_path: "/uploads",
+    enabled: true, // optional
+    options: [], // optional
+    schedule: "0 3 * * *", // optional
+    target_folder_id: "" // optional
+)
 
 ```

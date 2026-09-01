@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,10 +7,10 @@ let client = Client()
 
 let markets = Markets(client)
 
-let marketCurrency = try await markets.marketsCurrenciesCreate(
+let error = try await markets.marketsCurrenciesCreate(
     market_id: "",
-    code: "",
-    is_default: false, // optional
+    code: "EUR",
+    is_default: true, // optional
     position: 0 // optional
 )
 

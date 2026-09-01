@@ -2,7 +2,7 @@ import UIKit
 import NIO
 import Appwrite
 
-let host = "https://cloud.appwrite.io/v1"
+let host = "https://api.revenexx.com/v1"
 
 class ViewController: UIViewController {
 
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         do {
             let response = try await account.create(
                 userId: "unique()",
-                email: "jake@appwrite.io",
+                email: "jake@example.com",
                 password: "password"
             )
             self.response = String(describing: response.toMap())
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     @IBAction func loginClick(_ sender: Any) async {
         do {
             let response = try await account.createEmailSession(
-                email: "jake@appwrite.io",
+                email: "jake@example.com",
                 password: "password"
             )
             self.response = String(describing: response.toMap())
@@ -72,8 +72,8 @@ class ViewController: UIViewController {
         do {
             let response = try await account.createOAuth2Session(
                 provider: "facebook",
-                success: "https://cloud.appwrite.io/auth/oauth2/success",
-                failure: "https://cloud.appwrite.io/auth/oauth2/failure"
+                success: "https://api.revenexx.com/auth/oauth2/success",
+                failure: "https://api.revenexx.com/auth/oauth2/failure"
             )
             self.response = String(describing: response)
         } catch {

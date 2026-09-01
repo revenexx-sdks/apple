@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,12 +7,12 @@ let client = Client()
 
 let products = Products(client)
 
-let productAssociations = try await products.productsProductAssociationsCreate(
+let error = try await products.productsProductAssociationsCreate(
     association_type_id: "",
     product_id: "",
     target_product_id: "",
-    position: 0, // optional
-    quantity: 0 // optional
+    position: 1, // optional
+    quantity: 4 // optional
 )
 
 ```

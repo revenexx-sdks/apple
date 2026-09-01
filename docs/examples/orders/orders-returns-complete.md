@@ -1,5 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,10 +8,10 @@ let client = Client()
 
 let orders = Orders(client)
 
-let orderReturn = try await orders.ordersReturnsComplete(
+let error = try await orders.ordersReturnsComplete(
     id: "",
     rid: "",
-    resolution: "" // optional
+    resolution: .refund // optional
 )
 
 ```

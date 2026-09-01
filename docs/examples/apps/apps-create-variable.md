@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -11,7 +11,7 @@ let variable = try await apps.appsCreateVariable(
     functionId: "",
     key: "",
     value: "",
-    secret: false // optional
+    secret: true // optional
 )
 
 ```

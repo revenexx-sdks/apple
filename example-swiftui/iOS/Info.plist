@@ -24,10 +24,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>io.appwrite</string>
+			<string>com.revenexx</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>appwrite-callback-60f6a0d6e2a52</string>
+				<string>revenexx-callback-60f6a0d6e2a52</string>
 			</array>
 		</dict>
 	</array>
