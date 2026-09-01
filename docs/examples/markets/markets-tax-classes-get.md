@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,7 +7,7 @@ let client = Client()
 
 let markets = Markets(client)
 
-let marketTaxClass = try await markets.marketsTaxClassesGet(
+let error = try await markets.marketsTaxClassesGet(
     market_id: "",
     id: ""
 )

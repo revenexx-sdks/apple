@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -10,7 +10,7 @@ let apps = Apps(client)
 
 let usageFunction = try await apps.appsGetUsage(
     functionId: "",
-    range: .24h // optional
+    range: ._24h // optional
 )
 
 ```

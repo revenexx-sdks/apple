@@ -4,7 +4,7 @@ import NIO
 import Firebase
 import FirebaseMessaging
 
-let host = "https://cloud.appwrite.io/v1"
+let host = "https://api.revenexx.com/v1"
 let projectId = "[YOUR_PROJECT_ID]"
 
 let client = Client()

@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "RevenexxAPIRevenexx",
+    name: "Revenexx",
     platforms: [
         .iOS("15.0"),
         .macOS("11.0"),
@@ -12,11 +12,11 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "RevenexxAPIRevenexx",
+            name: "Revenexx",
             targets: [
-                "RevenexxAPIRevenexx",
-                "RevenexxAPIRevenexxEnums",
-                "RevenexxAPIRevenexxModels",
+                "Revenexx",
+                "RevenexxEnums",
+                "RevenexxModels",
                 "JSONCodable"
             ]
         ),
@@ -27,32 +27,32 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "RevenexxAPIRevenexx",
+            name: "Revenexx",
             dependencies: [
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
                 .product(name: "NIOWebSocket", package: "swift-nio"),
-                "RevenexxAPIRevenexxModels",
-                "RevenexxAPIRevenexxEnums",
+                "RevenexxModels",
+                "RevenexxEnums",
                 "JSONCodable"
             ]
         ),
         .target(
-            name: "RevenexxAPIRevenexxModels",
+            name: "RevenexxModels",
             dependencies: [
-                "RevenexxAPIRevenexxEnums",
+                "RevenexxEnums",
                 "JSONCodable"
             ]
         ),
         .target(
-            name: "RevenexxAPIRevenexxEnums"
+            name: "RevenexxEnums"
         ),
         .target(
             name: "JSONCodable"
         ),
         .testTarget(
-            name: "RevenexxAPIRevenexxTests",
+            name: "RevenexxTests",
             dependencies: [
-                "RevenexxAPIRevenexx"
+                "Revenexx"
             ]
         )
     ],

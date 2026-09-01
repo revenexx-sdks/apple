@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -11,9 +11,9 @@ let apps = Apps(client)
 let templateFunctionList = try await apps.appsListTemplates(
     runtimes: [.node180], // optional
     useCases: [.starter], // optional
-    limit: 0, // optional
-    offset: 0, // optional
-    total: false // optional
+    limit: 1, // optional
+    offset: 1, // optional
+    total: true // optional
 )
 
 ```

@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -12,21 +12,21 @@ let function = try await apps.appsCreate(
     functionId: "",
     name: "",
     runtime: .node180,
-    commands: "", // optional
-    enabled: false, // optional
-    entrypoint: "", // optional
+    commands: "npm install", // optional
+    enabled: true, // optional
+    entrypoint: "src/main.js", // optional
     events: [], // optional
-    execute: [], // optional
+    execute: ["any"], // optional
     installationId: "", // optional
-    logging: false, // optional
-    providerBranch: "", // optional
+    logging: true, // optional
+    providerBranch: "main", // optional
     providerRepositoryId: "", // optional
     providerRootDirectory: "", // optional
-    providerSilentMode: false, // optional
-    schedule: "", // optional
+    providerSilentMode: true, // optional
+    schedule: "0 3 * * *", // optional
     scopes: [.sessionsWrite], // optional
-    specification: "", // optional
-    timeout: 0 // optional
+    specification: "s-1vcpu-512mb", // optional
+    timeout: 1 // optional
 )
 
 ```

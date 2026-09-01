@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,15 +7,18 @@ let client = Client()
 
 let carts = Carts(client)
 
-let cart = try await carts.cartsCreate(
+let error = try await carts.cartsCreate(
     channel_id: "", // optional
     contact_id: "", // optional
-    currency: "", // optional
-    is_current: false, // optional
-    market_id: "", // optional
-    metadata: [:], // optional
-    name: "", // optional
-    session_key: "" // optional
+    currency: "EUR", // optional
+    is_current: true, // optional
+    metadata: [
+        "campaign": "spring-catalogue",
+        "locale": "de-DE",
+        "source": "storefront"
+    ], // optional
+    name: "Weekly order", // optional
+    session_key: "a1b2c3d4e5f6" // optional
 )
 
 ```

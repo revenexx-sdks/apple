@@ -1,0 +1,156 @@
+import Foundation
+import JSONCodable
+import RevenexxEnums
+
+/// An item needs an identity: 'name' or 'sku'.
+open class CartItemCreateRequest<T : Codable>: Codable {
+
+    enum CodingKeys: String, CodingKey {
+        case configuration = "configuration"
+        case currency = "currency"
+        case metadata = "metadata"
+        case name = "name"
+        case position = "position"
+        case product_id = "product_id"
+        case quantity = "quantity"
+        case sku = "sku"
+        case snapshot = "snapshot"
+        case tax_rate = "tax_rate"
+        case type = "type"
+        case unit = "unit"
+        case unit_price = "unit_price"
+    }
+
+    /// What was configured on this line, in the configurator's own vocabulary — this app stores it and reads nothing out of it. Its mere PRESENCE is behaviour: a line that carries a configuration never merges with another, because two differently configured units of the same article are not one line. Keys are the configurator's; the example is one shape, not the shape.
+    public let configuration: [String: AnyCodable]?
+    /// ISO 4217 code. Defaults to the cart's currency.
+    public let currency: String?
+    /// Free-form data the storefront hangs on the line. Stored and returned verbatim; no key in here is read by this app.
+    public let metadata: [String: AnyCodable]?
+    /// What the line reads as on the cart page. Falls back to 'sku' when omitted, so a line always has something to show.
+    public let name: String?
+    /// Sort order within the cart, ascending. Default 0 when adding a line; in a bulk replace the payload order fills it in.
+    public let position: Int?
+    /// The catalogue product, when the line comes from one. Part of the merge identity: same product, same price, one line.
+    public let product_id: String?
+    /// How much of it — default 1. Fractional is legal (2.5 m of cable); zero and negative are not. On a plain product line that merges into an existing one, this is ADDED to what is already there, and max_quantity_per_line is checked on the result.
+    public let quantity: Double?
+    /// The article number, exactly as the merchant knows it. Free text — this app does not resolve it against the catalogue — and part of the merge identity together with product_id and unit_price. The example only shows the shape of a real article number; nothing here enforces one.
+    public let sku: String?
+    /// The product as the buyer was shown it when this line was added — the cart's own copy, so it stays honest when the catalogue moves underneath it. Free-form apart from the price: conversion reads `unit_price` (or `price` as a fallback) and nothing else. A snapshot without a readable price leaves the line alone in both price modes, which is deliberate — a missing snapshot must never be read as "free".
+    public let snapshot: CartItemSnapshot<T>?
+    /// VAT percent for this line, as a number (19 means 19 %). Stored for the order to use — no total in this app includes tax.
+    public let tax_rate: Double?
+    /// Line type (default 'product'). Plain product lines merge by product+price; configurations always stand alone.
+    public let type: RevenexxEnums.CartItemType?
+    /// The unit the quantity is counted in. Display and ERP hand-over only — this app converts nothing.
+    public let unit: String?
+    /// Net price of one unit — line_total is always derived from it, never sent. Part of the merge identity: the same article at a different price opens a new line rather than averaging into the old one.
+    public let unit_price: Double?
+
+    init(
+        configuration: [String: AnyCodable]?,
+        currency: String?,
+        metadata: [String: AnyCodable]?,
+        name: String?,
+        position: Int?,
+        product_id: String?,
+        quantity: Double?,
+        sku: String?,
+        snapshot: CartItemSnapshot<T>?,
+        tax_rate: Double?,
+        type: RevenexxEnums.CartItemType?,
+        unit: String?,
+        unit_price: Double?
+    ) {
+        self.configuration = configuration
+        self.currency = currency
+        self.metadata = metadata
+        self.name = name
+        self.position = position
+        self.product_id = product_id
+        self.quantity = quantity
+        self.sku = sku
+        self.snapshot = snapshot
+        self.tax_rate = tax_rate
+        self.type = type
+        self.unit = unit
+        self.unit_price = unit_price
+    }
+
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        self.configuration = try container.decodeIfPresent([String: AnyCodable].self, forKey: .configuration)
+        self.currency = try container.decodeIfPresent(String.self, forKey: .currency)
+        self.metadata = try container.decodeIfPresent([String: AnyCodable].self, forKey: .metadata)
+        self.name = try container.decodeIfPresent(String.self, forKey: .name)
+        self.position = try container.decodeIfPresent(Int.self, forKey: .position)
+        self.product_id = try container.decodeIfPresent(String.self, forKey: .product_id)
+        self.quantity = try container.decodeIfPresent(Double.self, forKey: .quantity)
+        self.sku = try container.decodeIfPresent(String.self, forKey: .sku)
+        self.snapshot = try container.decodeIfPresent(CartItemSnapshot<T>.self, forKey: .snapshot)
+        self.tax_rate = try container.decodeIfPresent(Double.self, forKey: .tax_rate)
+        if let typeString = try container.decodeIfPresent(String.self, forKey: .type) {
+            self.type = RevenexxEnums.CartItemType(rawValue: typeString)
+        } else {
+            self.type = nil
+        }
+        self.unit = try container.decodeIfPresent(String.self, forKey: .unit)
+        self.unit_price = try container.decodeIfPresent(Double.self, forKey: .unit_price)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+
+        try container.encodeIfPresent(configuration, forKey: .configuration)
+        try container.encodeIfPresent(currency, forKey: .currency)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(name, forKey: .name)
+        try container.encodeIfPresent(position, forKey: .position)
+        try container.encodeIfPresent(product_id, forKey: .product_id)
+        try container.encodeIfPresent(quantity, forKey: .quantity)
+        try container.encodeIfPresent(sku, forKey: .sku)
+        try container.encodeIfPresent(snapshot, forKey: .snapshot)
+        try container.encodeIfPresent(tax_rate, forKey: .tax_rate)
+        try container.encodeIfPresent(type?.rawValue, forKey: .type)
+        try container.encodeIfPresent(unit, forKey: .unit)
+        try container.encodeIfPresent(unit_price, forKey: .unit_price)
+    }
+
+    public func toMap() -> [String: Any] {
+        return [
+            "configuration": configuration as Any,
+            "currency": currency as Any,
+            "metadata": metadata as Any,
+            "name": name as Any,
+            "position": position as Any,
+            "product_id": product_id as Any,
+            "quantity": quantity as Any,
+            "sku": sku as Any,
+            "snapshot": snapshot?.toMap() as Any,
+            "tax_rate": tax_rate as Any,
+            "type": type?.rawValue as Any,
+            "unit": unit as Any,
+            "unit_price": unit_price as Any
+        ]
+    }
+
+    public static func from(map: [String: Any] ) -> CartItemCreateRequest {
+        return CartItemCreateRequest(
+            configuration: map["configuration"] as? [String: AnyCodable],
+            currency: map["currency"] as? String,
+            metadata: map["metadata"] as? [String: AnyCodable],
+            name: map["name"] as? String,
+            position: map["position"] as? Int,
+            product_id: map["product_id"] as? String,
+            quantity: map["quantity"] as? Double,
+            sku: map["sku"] as? String,
+            snapshot: CartItemSnapshot.from(map: map["snapshot"] as! [String: Any]),
+            tax_rate: map["tax_rate"] as? Double,
+            type: map["type"] as? String != nil ? CartItemType(rawValue: map["type"] as! String) : nil,
+            unit: map["unit"] as? String,
+            unit_price: map["unit_price"] as? Double
+        )
+    }
+}

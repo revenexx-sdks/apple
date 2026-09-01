@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,10 +8,10 @@ let client = Client()
 let avatars = Avatars(client)
 
 let result = try await avatars.avatarsGetInitials(
-    name: "", // optional
-    width: 0, // optional
-    height: 0, // optional
-    background: "" // optional
+    name: "Ada Lovelace", // optional
+    width: 1, // optional
+    height: 1, // optional
+    background: "1a73e8" // optional
 )
 
 ```

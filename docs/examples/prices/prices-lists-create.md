@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,23 +8,30 @@ let client = Client()
 
 let prices = Prices(client)
 
-let priceList = try await prices.pricesListsCreate(
-    code: "",
-    name: "",
+let error = try await prices.pricesListsCreate(
+    code: "dealer-de",
+    name: "Dealer prices",
     channel_id: "", // optional
     contact_id: "", // optional
-    currency: "", // optional
-    description: "", // optional
-    is_default: false, // optional
-    labels: [:], // optional
-    market_id: "", // optional
-    metadata: [:], // optional
+    currency: "EUR", // optional
+    description: "Contract prices for authorised dealers.", // optional
+    is_default: true, // optional
+    labels: [
+        "de": "Händlerpreise",
+        "en": "Dealer prices"
+    ], // optional
+    metadata: [
+        "erp_price_group": "A1",
+        "source_system": "erp"
+    ], // optional
     organization_id: "", // optional
-    priority: 0, // optional
+    priority: 1, // optional
+    requires_auth: true, // optional
     status: .active, // optional
-    tax_included: false, // optional
-    valid_from: "", // optional
-    valid_until: "" // optional
+    tax_basis: .net, // optional
+    tax_included: true, // optional
+    valid_from: "2026-01-01T00:00:00Z", // optional
+    valid_until: "2026-12-31T23:59:59Z" // optional
 )
 
 ```

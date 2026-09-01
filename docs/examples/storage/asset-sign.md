@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -9,7 +9,7 @@ let storage = Storage(client)
 
 let result = try await storage.assetSign(
     id: "",
-    ttl_seconds: 0 // optional
+    ttl_seconds: 1 // optional
 )
 
 ```

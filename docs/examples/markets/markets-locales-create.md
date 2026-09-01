@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,12 +7,12 @@ let client = Client()
 
 let markets = Markets(client)
 
-let marketLocale = try await markets.marketsLocalesCreate(
+let error = try await markets.marketsLocalesCreate(
     market_id: "",
-    code: "",
-    country: "",
-    language: "",
-    is_default: false, // optional
+    code: "de-DE",
+    country: "DE",
+    language: "de",
+    is_default: true, // optional
     position: 0 // optional
 )
 

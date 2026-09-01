@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -10,9 +10,9 @@ let avatars = Avatars(client)
 
 let result = try await avatars.avatarsGetCreditCard(
     code: .amex,
-    width: 0, // optional
-    height: 0, // optional
-    quality: 0 // optional
+    width: 1, // optional
+    height: 1, // optional
+    quality: 1 // optional
 )
 
 ```

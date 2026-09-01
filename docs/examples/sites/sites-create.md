@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -14,19 +14,19 @@ let site = try await sites.sitesCreate(
     name: "",
     siteId: "",
     adapter: .static, // optional
-    buildCommand: "", // optional
-    enabled: false, // optional
-    fallbackFile: "", // optional
-    installCommand: "", // optional
+    buildCommand: "npm run build", // optional
+    enabled: true, // optional
+    fallbackFile: "index.html", // optional
+    installCommand: "npm install", // optional
     installationId: "", // optional
-    logging: false, // optional
+    logging: true, // optional
     outputDirectory: "", // optional
-    providerBranch: "", // optional
+    providerBranch: "main", // optional
     providerRepositoryId: "", // optional
     providerRootDirectory: "", // optional
-    providerSilentMode: false, // optional
-    specification: "", // optional
-    timeout: 0 // optional
+    providerSilentMode: true, // optional
+    specification: "s-1vcpu-512mb", // optional
+    timeout: 1 // optional
 )
 
 ```

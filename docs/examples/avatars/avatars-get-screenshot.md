@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -9,25 +9,25 @@ let client = Client()
 let avatars = Avatars(client)
 
 let result = try await avatars.avatarsGetScreenshot(
-    url: "",
+    url: "https://example.com",
     headers: [:], // optional
-    viewportWidth: 0, // optional
-    viewportHeight: 0, // optional
-    scale: 0, // optional
+    viewportWidth: 1, // optional
+    viewportHeight: 1, // optional
+    scale: 1, // optional
     theme: .light, // optional
-    userAgent: "", // optional
-    fullpage: false, // optional
-    locale: "", // optional
+    userAgent: "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X) AppleWebKit/605.1.15", // optional
+    fullpage: true, // optional
+    locale: "en-US", // optional
     timezone: .africaAbidjan, // optional
-    latitude: 0, // optional
-    longitude: 0, // optional
-    accuracy: 0, // optional
-    touch: false, // optional
+    latitude: 9.99, // optional
+    longitude: 9.99, // optional
+    accuracy: 9.99, // optional
+    touch: true, // optional
     permissions: [.geolocation], // optional
-    sleep: 0, // optional
-    width: 0, // optional
-    height: 0, // optional
-    quality: 0, // optional
+    sleep: 1, // optional
+    width: 1, // optional
+    height: 1, // optional
+    quality: 1, // optional
     output: .jpg // optional
 )
 

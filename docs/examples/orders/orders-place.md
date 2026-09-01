@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,24 +7,54 @@ let client = Client()
 
 let orders = Orders(client)
 
-let orderDetail = try await orders.ordersPlace(
+let error = try await orders.ordersPlace(
     items: [],
-    billing_address: [:], // optional
-    buyer: [:], // optional
+    billing_address: [
+        "city": "Berlin",
+        "company": "Beispiel Industrietechnik GmbH",
+        "country": "DE",
+        "name": "Anna Berger",
+        "street": "Musterstraße 12",
+        "zip": "10115"
+    ], // optional
+    buyer: [
+        "company": "Beispiel Industrietechnik GmbH",
+        "customer_number": "K-10042",
+        "email": "anna.berger@example.com",
+        "name": "Anna Berger"
+    ], // optional
     cart_id: "", // optional
     channel_id: "", // optional
     contact_id: "", // optional
-    currency: "", // optional
-    customer_order_number: "", // optional
-    grand_total: 0, // optional
-    market_id: "", // optional
-    metadata: [:], // optional
+    currency: "EUR", // optional
+    customer_order_number: "PO-2026-0042", // optional
+    grand_total: 243.9, // optional
+    metadata: [
+        "erp_batch": "2026-W32"
+    ], // optional
     organization_id: "", // optional
-    payment: [:], // optional
-    shipping: [:], // optional
-    shipping_address: [:], // optional
-    shipping_total: 0, // optional
-    user_data: [:] // optional
+    payment: [
+        "method": "invoice",
+        "status": "open"
+    ], // optional
+    shipping: [
+        "method": "standard",
+        "price": 5.9,
+        "tax_rate": 19
+    ], // optional
+    shipping_address: [
+        "city": "Berlin",
+        "company": "Beispiel Industrietechnik GmbH",
+        "country": "DE",
+        "name": "Anna Berger",
+        "street": "Musterstraße 12",
+        "zip": "10115"
+    ], // optional
+    shipping_total: 5.9, // optional
+    user_data: [
+        "campaign": "spring-catalogue",
+        "source": "webshop"
+    ] // optional
 )
 
 ```

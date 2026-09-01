@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,10 +8,10 @@ let client = Client()
 
 let orders = Orders(client)
 
-let orderComment = try await orders.ordersCommentsCreate(
+let error = try await orders.ordersCommentsCreate(
     id: "",
-    body: "",
-    author: "", // optional
+    body: "Called the customer, delivery agreed for next week.",
+    author: "service-desk", // optional
     visibility: .internal // optional
 )
 

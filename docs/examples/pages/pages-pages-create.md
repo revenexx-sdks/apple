@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,13 +7,13 @@ let client = Client()
 
 let pages = Pages(client)
 
-let page = try await pages.pagesPagesCreate(
-    title: "",
-    bundle: "", // optional
+let error = try await pages.pagesPagesCreate(
+    title: "About us",
+    bundle: "standard", // optional
     hostOptions: [:], // optional
     meta: [:], // optional
-    slug: "", // optional
-    sourceLanguage: "" // optional
+    slug: "about-us", // optional
+    sourceLanguage: "de" // optional
 )
 
 ```

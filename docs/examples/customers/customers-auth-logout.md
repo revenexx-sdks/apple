@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,7 +7,7 @@ let client = Client()
 
 let customers = Customers(client)
 
-let result = try await customers.customersAuthLogout(
+let error = try await customers.customersAuthLogout(
     session_id: "",
     user_id: ""
 )

@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,7 +7,7 @@ let client = Client()
 
 let pages = Pages(client)
 
-let template = try await pages.pagesTemplatesGet(
+let error = try await pages.pagesTemplatesGet(
     id: ""
 )
 

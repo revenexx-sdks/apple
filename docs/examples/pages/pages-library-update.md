@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,10 +7,10 @@ let client = Client()
 
 let pages = Pages(client)
 
-let libraryItem = try await pages.pagesLibraryUpdate(
+let error = try await pages.pagesLibraryUpdate(
     id: "",
-    bundle: "", // optional
-    label: "", // optional
+    bundle: "teaser", // optional
+    label: "Newsletter teaser", // optional
     tree: [:] // optional
 )
 

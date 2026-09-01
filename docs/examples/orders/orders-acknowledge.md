@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,9 +7,9 @@ let client = Client()
 
 let orders = Orders(client)
 
-let order = try await orders.ordersAcknowledge(
+let error = try await orders.ordersAcknowledge(
     id: "",
-    external_ref: "" // optional
+    external_ref: "ERP-4711" // optional
 )
 
 ```

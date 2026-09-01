@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,13 +7,13 @@ let client = Client()
 
 let pages = Pages(client)
 
-let template = try await pages.pagesTemplatesUpdate(
+let error = try await pages.pagesTemplatesUpdate(
     id: "",
-    description: "", // optional
-    field_name: "", // optional
-    is_default: false, // optional
-    label: "", // optional
-    page_bundle: "", // optional
+    description: "Full-width hero followed by a two-column teaser row.", // optional
+    field_name: "content", // optional
+    is_default: true, // optional
+    label: "Hero with two teasers", // optional
+    page_bundle: "standard", // optional
     tree: [] // optional
 )
 

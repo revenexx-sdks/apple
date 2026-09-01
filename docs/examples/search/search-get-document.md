@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,8 +8,8 @@ let client = Client()
 
 let search = Search(client)
 
-let result = try await search.searchGetDocument(
-    collection: .greetings,
+let error = try await search.searchGetDocument(
+    collection: .products,
     documentId: ""
 )
 

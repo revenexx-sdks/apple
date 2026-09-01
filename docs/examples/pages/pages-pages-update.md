@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,13 +8,13 @@ let client = Client()
 
 let pages = Pages(client)
 
-let page = try await pages.pagesPagesUpdate(
+let error = try await pages.pagesPagesUpdate(
     id: "",
-    bundle: "", // optional
+    bundle: "standard", // optional
     meta: [:], // optional
-    slug: "", // optional
+    slug: "about-us", // optional
     status: .draft, // optional
-    title: "" // optional
+    title: "About us" // optional
 )
 
 ```

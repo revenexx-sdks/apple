@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,14 +7,17 @@ let client = Client()
 
 let customers = Customers(client)
 
-let authRegisterResponse = try await customers.customersAuthRegister(
-    email: "",
+let error = try await customers.customersAuthRegister(
+    email: "einkauf@example.com",
     password: "",
-    first_name: "", // optional
-    last_name: "", // optional
-    locale: "", // optional
+    first_name: "Anna", // optional
+    last_name: "Berger", // optional
+    locale: "de-DE", // optional
     organization_id: "", // optional
-    organization_name: "" // optional
+    organization_name: "Beispiel Industrietechnik GmbH", // optional
+    url: "https://shop.example.com/account", // optional
+    vat_id: "DE123456789", // optional
+    verification_url: "https://shop.example.com/bestaetigen" // optional
 )
 
 ```

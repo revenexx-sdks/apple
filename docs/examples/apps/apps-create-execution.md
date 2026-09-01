@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -10,11 +10,11 @@ let apps = Apps(client)
 
 let execution = try await apps.appsCreateExecution(
     functionId: "",
-    async: false, // optional
+    async: true, // optional
     body: "", // optional
     headers: [:], // optional
     method: .gET, // optional
-    path: "", // optional
+    path: "/", // optional
     scheduledAt: "" // optional
 )
 

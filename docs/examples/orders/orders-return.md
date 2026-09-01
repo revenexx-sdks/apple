@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,11 +7,14 @@ let client = Client()
 
 let orders = Orders(client)
 
-let orderReturn = try await orders.ordersReturn(
+let error = try await orders.ordersReturn(
     id: "",
-    positions: [],
-    metadata: [:], // optional
-    reason: "" // optional
+    metadata: [
+        "rma_portal_case": "C-2026-0917"
+    ], // optional
+    positions: [], // optional
+    reason: "Damaged on arrival", // optional
+    restock: true // optional
 )
 
 ```

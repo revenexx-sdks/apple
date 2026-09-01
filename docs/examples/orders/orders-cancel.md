@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,10 +7,10 @@ let client = Client()
 
 let orders = Orders(client)
 
-let order = try await orders.ordersCancel(
+let error = try await orders.ordersCancel(
     id: "",
-    cancelled_by: "", // optional
-    reason: "" // optional
+    cancelled_by: "service-desk", // optional
+    reason: "Customer withdrew the order" // optional
 )
 
 ```

@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,8 +7,15 @@ let client = Client()
 
 let orders = Orders(client)
 
-let result = try await orders.ordersEventsList(
-    id: ""
+let error = try await orders.ordersEventsList(
+    id: "",
+    id_query: "", // optional
+    name: "order.shipment.created", // optional
+    actor: "", // optional
+    created_at: "2026-01-01T12:00:00Z", // optional
+    limit: 50, // optional
+    offset: 0, // optional
+    order: "created_at.desc" // optional
 )
 
 ```

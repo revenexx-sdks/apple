@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -9,8 +9,8 @@ let sites = Sites(client)
 
 let deployment = try await sites.sitesCreateDeployment(
     siteId: "",
-    activate: false,
-    code: "",
+    activate: true,
+    code: InputFile.fromPath("file.png"),
     buildCommand: "", // optional
     installCommand: "", // optional
     outputDirectory: "" // optional

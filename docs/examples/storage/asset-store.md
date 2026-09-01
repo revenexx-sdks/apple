@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -9,14 +9,14 @@ let client = Client()
 let storage = Storage(client)
 
 let result = try await storage.assetStore(
-    file: "",
+    file: InputFile.fromPath("file.png"),
     alt_text: "", // optional
     description: "", // optional
     display_name: "", // optional
     folder_id: "", // optional
-    keep_archive: false, // optional
+    keep_archive: true, // optional
     tags: [], // optional
-    unpack: false, // optional
+    unpack: true, // optional
     visibility: .public // optional
 )
 

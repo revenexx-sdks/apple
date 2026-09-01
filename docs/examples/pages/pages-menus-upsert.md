@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,9 +7,9 @@ let client = Client()
 
 let pages = Pages(client)
 
-let menu = try await pages.pagesMenusUpsert(
-    label: "",
-    menuKey: "",
+let error = try await pages.pagesMenusUpsert(
+    label: "Main navigation",
+    menuKey: "main",
     items: [] // optional
 )
 

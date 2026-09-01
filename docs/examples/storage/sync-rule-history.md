@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -9,8 +9,8 @@ let storage = Storage(client)
 
 let result = try await storage.syncRuleHistory(
     rule_id: "", // optional
-    from: "", // optional
-    to: "" // optional
+    from: "2026-01-01T12:00:00Z", // optional
+    to: "2026-01-01T12:00:00Z" // optional
 )
 
 ```

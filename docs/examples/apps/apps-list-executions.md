@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -10,7 +10,7 @@ let apps = Apps(client)
 let executionList = try await apps.appsListExecutions(
     functionId: "",
     queries: [], // optional
-    total: false // optional
+    total: true // optional
 )
 
 ```

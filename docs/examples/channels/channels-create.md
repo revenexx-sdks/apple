@@ -1,6 +1,6 @@
 ```swift
-import RevenexxAPIRevenexx
-import RevenexxAPIRevenexxEnums
+import Revenexx
+import RevenexxEnums
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -8,14 +8,18 @@ let client = Client()
 
 let channels = Channels(client)
 
-let channel = try await channels.channelsCreate(
-    code: "",
-    name: "",
-    is_default: false, // optional
-    labels: [:], // optional
-    position: 0, // optional
+let error = try await channels.channelsCreate(
+    code: "shop",
+    name: "Shop",
+    is_default: true, // optional
+    labels: [
+        "de": "Shop",
+        "en": "Shop"
+    ], // optional
+    position: 1, // optional
     status: .active, // optional
-    type: .storefront // optional
+    type: "storefront", // optional
+    unassigned_visibility: .inherit // optional
 )
 
 ```

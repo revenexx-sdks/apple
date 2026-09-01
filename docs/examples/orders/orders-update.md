@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,14 +7,38 @@ let client = Client()
 
 let orders = Orders(client)
 
-let order = try await orders.ordersUpdate(
+let error = try await orders.ordersUpdate(
     id: "",
-    billing_address: [:], // optional
-    buyer: [:], // optional
-    customer_order_number: "", // optional
-    metadata: [:], // optional
-    shipping_address: [:], // optional
-    user_data: [:] // optional
+    billing_address: [
+        "city": "Berlin",
+        "company": "Beispiel Industrietechnik GmbH",
+        "country": "DE",
+        "name": "Anna Berger",
+        "street": "Musterstraße 12",
+        "zip": "10115"
+    ], // optional
+    buyer: [
+        "company": "Beispiel Industrietechnik GmbH",
+        "customer_number": "K-10042",
+        "email": "anna.berger@example.com",
+        "name": "Anna Berger"
+    ], // optional
+    customer_order_number: "PO-2026-0042", // optional
+    metadata: [
+        "erp_batch": "2026-W32"
+    ], // optional
+    shipping_address: [
+        "city": "Berlin",
+        "company": "Beispiel Industrietechnik GmbH",
+        "country": "DE",
+        "name": "Anna Berger",
+        "street": "Musterstraße 12",
+        "zip": "10115"
+    ], // optional
+    user_data: [
+        "campaign": "spring-catalogue",
+        "source": "webshop"
+    ] // optional
 )
 
 ```

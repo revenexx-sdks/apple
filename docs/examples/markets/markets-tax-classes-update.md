@@ -1,5 +1,5 @@
 ```swift
-import RevenexxAPIRevenexx
+import Revenexx
 
 let client = Client()
     .setEndpoint("https://api.revenexx.com") // Your API Endpoint
@@ -7,15 +7,18 @@ let client = Client()
 
 let markets = Markets(client)
 
-let marketTaxClass = try await markets.marketsTaxClassesUpdate(
+let error = try await markets.marketsTaxClassesUpdate(
     market_id: "",
     id: "",
-    code: "", // optional
-    is_default: false, // optional
-    labels: [:], // optional
-    name: "", // optional
+    code: "standard", // optional
+    is_default: true, // optional
+    labels: [
+        "de-DE": "Regelsatz",
+        "en-GB": "Standard rate"
+    ], // optional
+    name: "Standard rate", // optional
     position: 0, // optional
-    rate: 0 // optional
+    rate: 20 // optional
 )
 
 ```
